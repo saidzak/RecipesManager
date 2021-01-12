@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent myintent = new Intent(MainActivity.this,Details.class);
                 myintent.putExtra("titre",s);
                 startActivity(myintent);
-                finish();
 
             }
         });
@@ -55,7 +54,5 @@ public class MainActivity extends AppCompatActivity {
     public void btn_add(View view) {
         Intent myintent = new Intent(MainActivity.this,add.class);
         startActivity(myintent);
-        finish();
-
     }
 }

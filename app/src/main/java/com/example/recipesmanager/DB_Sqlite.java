@@ -1,5 +1,6 @@
 package com.example.recipesmanager;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -25,4 +26,23 @@ public class DB_Sqlite extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS recette");
         onCreate(db);
     }
+
+    public boolean insertData(String titre, String type, int nbpersonnes, String niveau, String ingredients, String instruction){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("titre",titre);
+        contentValues.put("type",type);
+        contentValues.put("nbpersonnes",nbpersonnes);
+        contentValues.put("niveau",niveau);
+        contentValues.put("ingredients",ingredients);
+        contentValues.put("instruction",instruction);
+        long result = db.insert("recette", null, contentValues);
+        if (result == -1)
+            return false;
+        else
+            return true;
+    }
 }
+
+
+
