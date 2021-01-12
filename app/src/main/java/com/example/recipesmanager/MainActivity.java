@@ -10,6 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +22,7 @@ public class MainActivity extends AppCompatActivity {
     ListView listv;
     ArrayList<Recette> list;
     ArrayAdapter adapter;
-    MesRecettes MR = new MesRecettes();
-
-
-
+    ArrayList<String> testlist = new ArrayList<String>();
 
 
     @Override
@@ -32,7 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
         listv = (ListView) findViewById(R.id.list);
 
-        adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, MR.gettitres());
+        testlist.add("Test 1");
+        testlist.add("Test 2");
+        testlist.add("Test 3");
+
+        adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, testlist);
         listv.setAdapter(adapter);
 
         listv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -46,7 +50,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    public void btn_add(View view) {
+        Intent myintent = new Intent(MainActivity.this,add.class);
+        startActivity(myintent);
+        finish();
 
     }
 }

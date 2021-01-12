@@ -19,6 +19,7 @@ public class Details extends AppCompatActivity {
         titre=getIntent().getExtras().getString("titre");
 
 
+
         
     }
 }
