@@ -68,5 +68,6 @@ public class Recette {
     public void setInstruction(String instruction) {
         this.instruction = instruction;
     }
+    
 
 }
