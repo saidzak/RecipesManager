@@ -18,11 +18,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<String> titres;
-    ListView listv;
-    ArrayList<Recette> list;
     ArrayAdapter adapter;
-    ArrayList<String> testlist = new ArrayList<String>();
+    DB_Sqlite mydata = new DB_Sqlite(MainActivity.this);
 
 
     @Override
@@ -30,29 +27,41 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listv = (ListView) findViewById(R.id.list);
+//        List<String> titres = new ArrayList<>();
+        List<Recette> allReceips = mydata.getAllReceips();
 
-        testlist.add("Test 1");
-        testlist.add("Test 2");
-        testlist.add("Test 3");
+//        for(int i=0; i < lista.size();i++){
+//            titres.add(lista.get(i).getTitre());
+//        }
 
-        adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, testlist);
-        listv.setAdapter(adapter);
+
+        ListView listv = (ListView) findViewById(R.id.list);
+        showList(allReceips, listv);
+
 
         listv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String s = listv.getItemAtPosition(position).toString();
-                Intent myintent = new Intent(MainActivity.this,Details.class);
-                myintent.putExtra("titre",s);
-                startActivity(myintent);
+
+                Recette clickedrecette = (Recette) parent.getItemAtPosition(position);
+                Intent todetails = new Intent(MainActivity.this, Details.class);
+
+                todetails.putExtra("selectedid", clickedrecette.getId());
+                startActivity(todetails);
 
             }
         });
     }
 
+    private void showList(List items, ListView listv) {
+        adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, items);
+        listv.setAdapter(adapter);
+    }
+
+
     public void btn_add(View view) {
-        Intent myintent = new Intent(MainActivity.this,add.class);
+        Intent myintent = new Intent(MainActivity.this, add.class);
         startActivity(myintent);
     }
+
 }

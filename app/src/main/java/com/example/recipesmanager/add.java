@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class add extends AppCompatActivity {
 
@@ -18,7 +19,6 @@ public class add extends AppCompatActivity {
     EditText ingredient;
     Spinner niveau;
     EditText instruction;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,27 @@ public class add extends AppCompatActivity {
     }
 
     public void tbn_ajouter(View view) {
-        db.insertData(titre.toString(),type.toString(), Integer.parseInt(nbpersonnes.toString()),ingredient.toString(),niveau.toString(),instruction.toString());
+        Recette recette = null;
+
+
+        try {
+            String ti = titre.getText().toString();
+            String ty = type.getSelectedItem().toString();
+            int nb = Integer.parseInt(nbpersonnes.getText().toString());
+            String ing = ingredient.getText().toString();
+            String ni = niveau.getSelectedItem().toString();
+            String ins = instruction.getText().toString();
+
+            recette = new Recette(ti, ty, nb, ni, ing, ins);
+            Toast.makeText(add.this, recette.toString(), Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            Toast.makeText(add.this, "ERROR", Toast.LENGTH_SHORT).show();
+        }
+
+        DB_Sqlite mydb = new DB_Sqlite(add.this);
+        boolean res = mydb.AddOne(recette);
+        if (res==true) Toast.makeText(add.this, "SUCCESS", Toast.LENGTH_SHORT).show();
 
     }
 }

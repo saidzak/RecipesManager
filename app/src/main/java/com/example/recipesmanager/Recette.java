@@ -5,19 +5,33 @@ import java.util.List;
 
 public class Recette {
 
+    int id;
     String titre;
     String type;
     int nbpersonnes;
     String niveau;
-    String ingredients[];
+    String ingredients;
     String instruction;
 
-    public Recette(String titre, String type, int nbpersonnes, String niveau, String[] ingredients, String instruction) {
+    public Recette(){}
+
+    public Recette( String titre, String type, int nbpersonnes, String niveau, String ingredients, String instruction) {
         this.titre = titre;
         this.type = type;
         this.nbpersonnes = nbpersonnes;
         this.niveau = niveau;
         this.ingredients = ingredients;
+        this.instruction = instruction;
+    }
+
+    public Recette(int id, String titre, String type, int nbpersonnes, String niveau, String ingredients, String instruction) {
+        this.id =id;
+        this.titre = titre;
+        this.type = type;
+        this.nbpersonnes = nbpersonnes;
+        this.niveau = niveau;
+        this.ingredients = ingredients;
+        this.instruction = instruction;
     }
 
 
@@ -37,7 +51,7 @@ public class Recette {
         return niveau;
     }
 
-    public String[] getIngredients() {
+    public String getIngredients() {
         return ingredients;
     }
 
@@ -57,7 +71,7 @@ public class Recette {
         this.niveau = niveau;
     }
 
-    public void setIngredients(String[] ingredients) {
+    public void setIngredients(String ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -68,6 +82,26 @@ public class Recette {
     public void setInstruction(String instruction) {
         this.instruction = instruction;
     }
-    
 
+
+    @Override
+    public String toString() {
+        return "Recette{" +
+                "id='" + id + '\'' +
+                ",titre='" + titre + '\'' +
+                ", type='" + type + '\'' +
+                ", nbpersonnes=" + nbpersonnes +
+                ", niveau='" + niveau + '\'' +
+                ", ingredients='" + ingredients + '\'' +
+                ", instruction='" + instruction + '\'' +
+                '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
