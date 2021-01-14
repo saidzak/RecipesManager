@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -15,13 +16,13 @@ import java.util.List;
 public class DB_Sqlite extends SQLiteOpenHelper {
 
     public static final String RECETTE_TABLE = "RECETTE_TABLE";
+    public static final String COL_ID = "COL_ID";
     public static final String COL_TITRE = "COL_TITRE";
     public static final String COL_TYPE = "COL_TYPE";
     public static final String COL_NBPERS = "COL_NBPERS";
     public static final String COL_NIVEAU = "COL_NIVEAU";
     public static final String COL_ING = "COL_ING";
     public static final String COL_INS = "COL_INS";
-    public static final String COL_ID = "COL_ID";
 
     public DB_Sqlite(Context context) {
         super(context, "recette.db", null, 1);
@@ -56,6 +57,25 @@ public class DB_Sqlite extends SQLiteOpenHelper {
         else return true;
     }
 
+
+    public boolean modifyOne(Recette recette) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COL_TITRE, recette.getTitre());
+        cv.put(COL_TYPE, recette.getType());
+        cv.put(COL_NBPERS, recette.getNbpersonnes());
+        cv.put(COL_NIVEAU, recette.getNiveau());
+        cv.put(COL_ING, recette.getIngredients());
+        cv.put(COL_INS, recette.getInstruction());
+
+        long insert = db.update(RECETTE_TABLE, cv,"COL_ID = ?", new String[] {String.valueOf(recette.getId())});
+
+        if (insert == -1) return false;
+        else return true;
+    }
+
+
     public List<Recette> getAllReceips() {
         List<Recette> returnlist = new ArrayList<Recette>();
 
@@ -89,15 +109,17 @@ public class DB_Sqlite extends SQLiteOpenHelper {
     }
 
 
-    @SuppressLint("Recycle")
-    public void deleteOne(Recette marecette) {
+
+
+
+    public void deleteOne(int id) {
         SQLiteDatabase mydb = this.getWritableDatabase();
 
-        String queryString = "DELETE FROM " + RECETTE_TABLE + " WHERE " + COL_ID + " = " + marecette.getId();
-
-        mydb.rawQuery(queryString, null);
-
+        mydb.delete(RECETTE_TABLE, "COL_ID = ?", new String[] {String.valueOf(id)});
     }
+
+
+
 
 
 

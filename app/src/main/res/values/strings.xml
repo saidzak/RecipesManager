@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">Recipes Manager</string>
 
-    <string-array name="types" >
+    <string-array name="types">
         <item>Petit Déjeuner</item>
         <item>Déjeuner</item>
         <item>Diner</item>
         <item>Collation</item>
     </string-array>
 
-    <string-array name="niveaux" >
+    <string-array name="niveaux">
         <item>Débutant</item>
         <item>Intermédiaire</item>
         <item>Avancé</item>
