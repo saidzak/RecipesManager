@@ -12,19 +12,21 @@ public class Recette {
     String niveau;
     String ingredients;
     String instruction;
+    String image;
 
     public Recette(){}
 
-    public Recette( String titre, String type, int nbpersonnes, String niveau, String ingredients, String instruction) {
+    public Recette( String titre, String type, int nbpersonnes, String niveau, String ingredients, String instruction, String image) {
         this.titre = titre;
         this.type = type;
         this.nbpersonnes = nbpersonnes;
         this.niveau = niveau;
         this.ingredients = ingredients;
         this.instruction = instruction;
+        this.image = image;
     }
 
-    public Recette(int id, String titre, String type, int nbpersonnes, String niveau, String ingredients, String instruction) {
+    public Recette(int id, String titre, String type, int nbpersonnes, String niveau, String ingredients, String instruction, String image) {
         this.id =id;
         this.titre = titre;
         this.type = type;
@@ -32,6 +34,7 @@ public class Recette {
         this.niveau = niveau;
         this.ingredients = ingredients;
         this.instruction = instruction;
+        this.image = image;
     }
 
 
@@ -86,15 +89,16 @@ public class Recette {
 
     @Override
     public String toString() {
-        return "Recette{" +
-                "id='" + id + '\'' +
-                ",titre='" + titre + '\'' +
-                ", type='" + type + '\'' +
-                ", nbpersonnes=" + nbpersonnes +
-                ", niveau='" + niveau + '\'' +
-                ", ingredients='" + ingredients + '\'' +
-                ", instruction='" + instruction + '\'' +
-                '}';
+        return titre;
+//                "Recette{" +
+//                "id='" + id + '\'' +
+//                ",titre='" + titre + '\'' +
+//                ", type='" + type + '\'' +
+//                ", nbpersonnes=" + nbpersonnes +
+//                ", niveau='" + niveau + '\'' +
+//                ", ingredients='" + ingredients + '\'' +
+//                ", instruction='" + instruction + '\'' +
+//                '}';
     }
 
     public int getId() {
@@ -103,5 +107,13 @@ public class Recette {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

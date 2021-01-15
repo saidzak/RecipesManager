@@ -88,7 +88,7 @@ public class Modify extends AppCompatActivity {
             String ni = niveau.getSelectedItem().toString();
             String ins = instruction.getText().toString();
 
-            modifiedrecette = new Recette(ti, ty, nb, ni, ing, ins);
+            modifiedrecette = new Recette(ti, ty, nb, ni, ing, ins, null);
 
 
         } catch (Exception e) {

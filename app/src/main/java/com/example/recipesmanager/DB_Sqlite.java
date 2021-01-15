@@ -23,6 +23,7 @@ public class DB_Sqlite extends SQLiteOpenHelper {
     public static final String COL_NIVEAU = "COL_NIVEAU";
     public static final String COL_ING = "COL_ING";
     public static final String COL_INS = "COL_INS";
+    public static final String COL_IMG = "COL_IMG";
 
     public DB_Sqlite(Context context) {
         super(context, "recette.db", null, 1);
@@ -30,7 +31,7 @@ public class DB_Sqlite extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableStatement = "CREATE TABLE " + RECETTE_TABLE + " (" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_TITRE + " TEXT, " + COL_TYPE + " TEXT, " + COL_NBPERS + " TEXT, " + COL_NIVEAU + " TEXT, " + COL_ING + " TEXT, " + COL_INS + " TEXT)";
+        String createTableStatement = "CREATE TABLE " + RECETTE_TABLE + " (" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_TITRE + " TEXT, " + COL_TYPE + " TEXT, " + COL_NBPERS + " TEXT, " + COL_NIVEAU + " TEXT, " + COL_ING + " TEXT, " + COL_INS + " TEXT, "+COL_IMG+" TEXT)";
         db.execSQL(createTableStatement);
     }
 
@@ -50,6 +51,7 @@ public class DB_Sqlite extends SQLiteOpenHelper {
         cv.put(COL_NIVEAU, recette.getNiveau());
         cv.put(COL_ING, recette.getIngredients());
         cv.put(COL_INS, recette.getInstruction());
+        cv.put(COL_IMG, recette.getImage());
 
         long insert = db.insert(RECETTE_TABLE, null, cv);
 
@@ -69,6 +71,7 @@ public class DB_Sqlite extends SQLiteOpenHelper {
         cv.put(COL_NIVEAU, recette.getNiveau());
         cv.put(COL_ING, recette.getIngredients());
         cv.put(COL_INS, recette.getInstruction());
+        cv.put(COL_IMG, recette.getImage());
 
         long result = db.update(RECETTE_TABLE, cv,COL_ID+" = '"+recette.getId() +"'", null);
 
@@ -97,8 +100,9 @@ public class DB_Sqlite extends SQLiteOpenHelper {
                 String recetteniveau = cursor.getString(4);
                 String recetteing = cursor.getString(5);
                 String recetteins = cursor.getString(6);
+                String recetteimg = cursor.getString(7);
 
-                Recette marecette = new Recette(recetteid, recettetitre, recettetype, recettenbpers, recetteniveau, recetteing, recetteins);
+                Recette marecette = new Recette(recetteid, recettetitre, recettetype, recettenbpers, recetteniveau, recetteing, recetteins,recetteimg);
                 returnlist.add(marecette);
             } while (cursor.moveToNext());
 
@@ -140,9 +144,10 @@ public class DB_Sqlite extends SQLiteOpenHelper {
                 int recettenbpers = cursor.getInt(3);
                 String recetteniveau = cursor.getString(4);
                 String recetteing = cursor.getString(5);
-                String recetteins = cursor.getString(6);
+            String recetteins = cursor.getString(6);
+            String recetteimg = cursor.getString(7);
 
-                marecette = new Recette(recetteid, recettetitre, recettetype, recettenbpers, recetteniveau, recetteing, recetteins);
+                marecette = new Recette(recetteid, recettetitre, recettetype, recettenbpers, recetteniveau, recetteing, recetteins,recetteimg);
         } else {
 //          rien ne sera a joute a la liste
         }

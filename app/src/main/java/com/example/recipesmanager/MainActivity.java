@@ -27,12 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        List<String> titres = new ArrayList<>();
         List<Recette> allReceips = mydata.getAllReceips();
-
-//        for(int i=0; i < lista.size();i++){
-//            titres.add(lista.get(i).getTitre());
-//        }
 
 
         ListView listv = (ListView) findViewById(R.id.list);

@@ -5,12 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.Serializable;
 
 public class Details extends AppCompatActivity {
@@ -23,6 +29,7 @@ public class Details extends AppCompatActivity {
     TextView tvniveau;
     TextView tvingredients;
     TextView tvinstruction;
+    ImageView tvimage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +45,7 @@ public class Details extends AppCompatActivity {
         tvtitre.setText(recette.getTitre());
 
         tvtitre = findViewById(R.id.id);
-        String tmpid= String.valueOf(recette.getId());
+        String tmpid = String.valueOf(recette.getId());
         tvtitre.setText(tmpid);
 
         tvtype = findViewById(R.id.type);
@@ -57,6 +64,12 @@ public class Details extends AppCompatActivity {
         tvinstruction = findViewById(R.id.instruction);
         tvinstruction.setText(recette.getInstruction());
 
+        tvimage = (ImageView) findViewById(R.id.image);
+        tvimage.setImageBitmap(BitmapFactory.decodeFile(recette.getImage()));
+
+
+
+        Toast.makeText(Details.this,recette.getImage(),Toast.LENGTH_SHORT).show();
 
 
     }
@@ -67,13 +80,12 @@ public class Details extends AppCompatActivity {
 
         DB_Sqlite mydb = new DB_Sqlite(Details.this);
 
-        AlertDialog diaBox = AskOption(id,mydb);
+        AlertDialog diaBox = AskOption(id, mydb);
         diaBox.show();
 
     }
 
-    private AlertDialog AskOption(int id, DB_Sqlite db)
-    {
+    private AlertDialog AskOption(int id, DB_Sqlite db) {
         AlertDialog myQuittingDialogBox = new AlertDialog.Builder(this)
                 .setTitle("Supprimer")
                 .setMessage("Voulez-vous supprimer ?")
@@ -97,7 +109,6 @@ public class Details extends AppCompatActivity {
                 .create();
         return myQuittingDialogBox;
     }
-
 
 
     public void btn_modify(View view) {

@@ -104,6 +104,14 @@
                 android:background="@color/cardview_shadow_start_color" />
 
             <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/eimage"
+                android:text="Choisis une image"
+                android:onClick="choose_image"/>
+
+
+            <Button
                 android:id="@+id/submit_add"
                 android:onClick="tbn_ajouter"
                 android:layout_width="153dp"
