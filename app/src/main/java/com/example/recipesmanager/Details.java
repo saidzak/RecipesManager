@@ -108,5 +108,6 @@ public class Details extends AppCompatActivity {
         Intent intent = new Intent(Details.this, Modify.class);
         intent.putExtra("id", id);
         startActivity(intent);
+        finish();
     }
 }

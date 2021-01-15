@@ -2,6 +2,7 @@ package com.example.recipesmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,8 +11,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class add extends AppCompatActivity {
-
-    DB_Sqlite db = new DB_Sqlite(this);
 
     EditText titre;
     Spinner type;
@@ -69,6 +68,10 @@ public class add extends AppCompatActivity {
         DB_Sqlite mydb = new DB_Sqlite(add.this);
         boolean res = mydb.AddOne(recette);
         if (res==true) Toast.makeText(add.this, "ENREGISTRÉ", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(add.this, MainActivity.class);
+        startActivity(intent);
+        finish();
 
     }
 }

@@ -60,6 +60,7 @@ public class DB_Sqlite extends SQLiteOpenHelper {
 
     public boolean modifyOne(Recette recette) {
         SQLiteDatabase db = this.getWritableDatabase();
+
         ContentValues cv = new ContentValues();
 
         cv.put(COL_TITRE, recette.getTitre());
@@ -69,9 +70,11 @@ public class DB_Sqlite extends SQLiteOpenHelper {
         cv.put(COL_ING, recette.getIngredients());
         cv.put(COL_INS, recette.getInstruction());
 
-        long insert = db.update(RECETTE_TABLE, cv,"COL_ID = ?", new String[] {String.valueOf(recette.getId())});
+        long result = db.update(RECETTE_TABLE, cv,COL_ID+" = '"+recette.getId() +"'", null);
 
-        if (insert == -1) return false;
+        db.close();
+
+        if (result == -1) return false;
         else return true;
     }
 

@@ -12,8 +12,6 @@ import android.widget.Toast;
 
 public class Modify extends AppCompatActivity {
 
-    DB_Sqlite db = new DB_Sqlite(this);
-
     EditText titre;
     Spinner type;
     EditText nbpersonnes;
@@ -58,15 +56,30 @@ public class Modify extends AppCompatActivity {
         recette = db.getRecetteById(id);
 //      ------------------------------------ Valeurs -------------------
         titre.setText(recette.getTitre());
-        type.setPrompt(recette.getType());
+        type.setSelection(getIndex(type, recette.getType()));
         nbpersonnes.setText(String.valueOf(recette.getNbpersonnes()));
         ingredient.setText(recette.getIngredients());
+        niveau.setSelection(getIndex(niveau, recette.getNiveau()));
         instruction.setText(recette.getInstruction());
     }
 
+    //    ---------------- Trouver l'indice de valuer du spinner-------------
+    public int getIndex(Spinner spinner, String myString) {
+        int index = 0;
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).equals(myString)) {
+                index = i;
+            }
+        }
+        return index;
+    }
+//--------------------------------------------------------
 
     public void tbn_enregistrer(View view) {
+
         DB_Sqlite mydb = new DB_Sqlite(Modify.this);
+        Recette modifiedrecette = null;
+
         try {
             String ti = titre.getText().toString();
             String ty = type.getSelectedItem().toString();
@@ -75,13 +88,20 @@ public class Modify extends AppCompatActivity {
             String ni = niveau.getSelectedItem().toString();
             String ins = instruction.getText().toString();
 
-            Recette modifiedrecette = new Recette(ti, ty, nb, ni, ing, ins);
-            boolean res = mydb.modifyOne(modifiedrecette);
-            if (res==true) Toast.makeText(Modify.this, "ENREGISTRÉ", Toast.LENGTH_SHORT).show();
+            modifiedrecette = new Recette(ti, ty, nb, ni, ing, ins);
+
 
         } catch (Exception e) {
             Toast.makeText(Modify.this, "ERREUR", Toast.LENGTH_SHORT).show();
         }
+
+        boolean res = mydb.modifyOne(modifiedrecette);
+
+        if (res == true) Toast.makeText(Modify.this, modifiedrecette.getTitre()+ " Modifié Avec Succès", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(Modify.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }
