@@ -19,6 +19,7 @@ public class Modify extends AppCompatActivity {
     Spinner niveau;
     EditText instruction;
     Recette recette;
+    int id;
 
 
     @Override
@@ -51,7 +52,7 @@ public class Modify extends AppCompatActivity {
 
 //        --------------------------------INTENT------------------------
         Intent intent = getIntent();
-        int id = intent.getExtras().getInt("id");
+        id = intent.getExtras().getInt("id");
         DB_Sqlite db = new DB_Sqlite(this);
         recette = db.getRecetteById(id);
 //      ------------------------------------ Valeurs -------------------
@@ -88,7 +89,7 @@ public class Modify extends AppCompatActivity {
             String ni = niveau.getSelectedItem().toString();
             String ins = instruction.getText().toString();
 
-            modifiedrecette = new Recette(ti, ty, nb, ni, ing, ins, null);
+            modifiedrecette = new Recette(id, ti, ty, nb, ni, ing, ins, null);
 
 
         } catch (Exception e) {
@@ -97,7 +98,7 @@ public class Modify extends AppCompatActivity {
 
         boolean res = mydb.modifyOne(modifiedrecette);
 
-        if (res == true) Toast.makeText(Modify.this, modifiedrecette.getTitre()+ " Modifié Avec Succès", Toast.LENGTH_SHORT).show();
+        if (res == true) Toast.makeText(Modify.this, modifiedrecette.getId()+ " Modifié Avec Succès", Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(Modify.this, MainActivity.class);
         startActivity(intent);

@@ -73,6 +73,7 @@ public class DB_Sqlite extends SQLiteOpenHelper {
         cv.put(COL_INS, recette.getInstruction());
         cv.put(COL_IMG, recette.getImage());
 
+        long where = recette.getId();
         long result = db.update(RECETTE_TABLE, cv,COL_ID+" = '"+recette.getId() +"'", null);
 
         db.close();

@@ -65,11 +65,13 @@ public class Details extends AppCompatActivity {
         tvinstruction.setText(recette.getInstruction());
 
         tvimage = (ImageView) findViewById(R.id.image);
-        tvimage.setImageBitmap(BitmapFactory.decodeFile(recette.getImage()));
+        String tmpimg = recette.getImage();
+        File imgFile = new  File(tmpimg);
+        tvimage.setImageBitmap(BitmapFactory.decodeFile(imgFile.getAbsolutePath()));
 
 
 
-        Toast.makeText(Details.this,recette.getImage(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(Details.this,tmpimg,Toast.LENGTH_SHORT).show();
 
 
     }
