@@ -9,7 +9,8 @@
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -19,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_baseline_add_24"
+        android:src="@drawable/add"
         app:maxImageSize="45dp"
         app:layout_anchorGravity="bottom|right|end" />
 

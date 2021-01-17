@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
                 todetails.putExtra("selectedid", clickedrecette.getId());
                 startActivity(todetails);
+                finish();
 
             }
         });
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     public void btn_add(View view) {
         Intent myintent = new Intent(MainActivity.this, add.class);
         startActivity(myintent);
+        finish();
     }
 
 }

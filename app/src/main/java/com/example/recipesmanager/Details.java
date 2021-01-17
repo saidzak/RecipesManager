@@ -125,4 +125,11 @@ public class Details extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Details.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

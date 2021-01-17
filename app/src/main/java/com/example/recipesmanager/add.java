@@ -113,4 +113,11 @@ public class add extends AppCompatActivity {
         return uri.getPath();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(add.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 }

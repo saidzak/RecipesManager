@@ -79,7 +79,7 @@ public class Modify extends AppCompatActivity {
         String tmpimg = recette.getImage();
         File imgFile = new  File(tmpimg);
         img.setImageBitmap(BitmapFactory.decodeFile(imgFile.getAbsolutePath()));
-        imgpath = recette.getImage();
+        imgpath = recette.getImage(); //Si l'image n'est pas modifie on envoit l'image courante
     }
 
     //    ---------------- Trouver l'indice de valuer du spinner-------------
@@ -140,8 +140,10 @@ public void choose_image(View view) {
         if (resultCode==RESULT_OK && requestCode==PICK_INAGE){
             Uri uri = data.getData();
             String x = getPath(uri);
-
             imgpath = x;
+
+            File imgFile = new  File(imgpath);
+            img.setImageBitmap(BitmapFactory.decodeFile(imgFile.getAbsolutePath()));
         }
     }
 
@@ -155,6 +157,14 @@ public void choose_image(View view) {
             return cursor.getString(column_index);
         }
         return uri.getPath();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Modify.this, Details.class);
+        intent.putExtra("selectedid", id);
+        startActivity(intent);
+        finish();
     }
 
 }
