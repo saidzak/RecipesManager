@@ -17,7 +17,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginRight="20dp"
             android:orientation="vertical"
-            android:layout_marginBottom="60dp">
+            android:paddingBottom="60dp">
 
             <ImageView
                 android:id="@+id/image"
@@ -36,7 +36,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
                     android:text="TEXT"
-                    android:textSize="30dp" />
+                    android:textSize="30dp"
+                    android:textStyle="bold"/>
 
 <!--                Cet TextView est pour recepurer l'id en cas de modification -->
                 <TextView
@@ -60,28 +61,33 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="17dp"/>
+                    android:textSize="17dp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/nbpersonnes"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="17dp"/>
+                    android:textSize="17dp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/niveau"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
-                    android:textSize="17dp"/>
+                    android:textSize="17dp"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ingredients :"
-                android:textSize="20dp" />
+                android:textSize="26dp"
+                android:layout_marginBottom="15dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/ingredients"
@@ -93,12 +99,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Instructions :"
-                android:textSize="20dp" />
+                android:textSize="26dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/instruction"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingBottom="25dp"/>
 
 
         </LinearLayout>
