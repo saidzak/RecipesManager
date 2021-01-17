@@ -31,6 +31,8 @@ public class Details extends AppCompatActivity {
     TextView tvinstruction;
     ImageView tvimage;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +73,7 @@ public class Details extends AppCompatActivity {
 
 
 
-        Toast.makeText(Details.this,tmpimg,Toast.LENGTH_SHORT).show();
+//        Toast.makeText(Details.this,tmpimg,Toast.LENGTH_SHORT).show();
 
 
     }

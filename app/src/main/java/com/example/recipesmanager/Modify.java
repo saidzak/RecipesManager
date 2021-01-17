@@ -1,14 +1,22 @@
 package com.example.recipesmanager;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.io.File;
 
 public class Modify extends AppCompatActivity {
 
@@ -18,9 +26,12 @@ public class Modify extends AppCompatActivity {
     EditText ingredient;
     Spinner niveau;
     EditText instruction;
+    ImageView img;
     Recette recette;
     int id;
 
+    private static final int PICK_INAGE=100;
+    String imgpath="null";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +60,7 @@ public class Modify extends AppCompatActivity {
         ingredient = findViewById(R.id.eingredients);
         niveau = findViewById(R.id.eniveau);
         instruction = findViewById(R.id.einstruction);
+        img = findViewById(R.id.image);
 
 //        --------------------------------INTENT------------------------
         Intent intent = getIntent();
@@ -62,6 +74,12 @@ public class Modify extends AppCompatActivity {
         ingredient.setText(recette.getIngredients());
         niveau.setSelection(getIndex(niveau, recette.getNiveau()));
         instruction.setText(recette.getInstruction());
+
+        img = (ImageView) findViewById(R.id.image);
+        String tmpimg = recette.getImage();
+        File imgFile = new  File(tmpimg);
+        img.setImageBitmap(BitmapFactory.decodeFile(imgFile.getAbsolutePath()));
+        imgpath = recette.getImage();
     }
 
     //    ---------------- Trouver l'indice de valuer du spinner-------------
@@ -89,7 +107,9 @@ public class Modify extends AppCompatActivity {
             String ni = niveau.getSelectedItem().toString();
             String ins = instruction.getText().toString();
 
-            modifiedrecette = new Recette(id, ti, ty, nb, ni, ing, ins, null);
+
+
+            modifiedrecette = new Recette(id, ti, ty, nb, ni, ing, ins, imgpath);
 
 
         } catch (Exception e) {
@@ -103,6 +123,38 @@ public class Modify extends AppCompatActivity {
         Intent intent = new Intent(Modify.this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+//    Traitement d'image
+public void choose_image(View view) {
+
+    Intent intent = new Intent(Intent.ACTION_PICK, Uri.parse(
+            "content://media/internal/images/media"
+    ));
+    startActivityForResult(intent, PICK_INAGE);
+}
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==RESULT_OK && requestCode==PICK_INAGE){
+            Uri uri = data.getData();
+            String x = getPath(uri);
+
+            imgpath = x;
+        }
+    }
+
+    public String getPath(Uri uri){
+        if(uri==null) return null;
+        String [] projection ={MediaStore.Images.Media.DATA};
+        Cursor cursor = managedQuery(uri, projection, null,null,null);
+        if(cursor!=null){
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        }
+        return uri.getPath();
     }
 
 }
