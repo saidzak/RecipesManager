@@ -23,7 +23,8 @@
                 android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="225dp"
-                android:src="@drawable/img" />
+                android:src="@drawable/img"
+                android:layout_marginBottom="10dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -38,7 +39,8 @@
                     android:onClick="btn_modify"
                     android:text="TEXT"
                     android:textSize="30dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-black"/>
 
                 <!--                Cet TextView est pour recepurer l'id en cas de modification   -->
                 <TextView
