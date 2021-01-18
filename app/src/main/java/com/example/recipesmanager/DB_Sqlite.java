@@ -31,11 +31,13 @@ public class DB_Sqlite extends SQLiteOpenHelper {
         super(context, "recette.db", null, 1);
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableStatement = "CREATE TABLE " + RECETTE_TABLE + " (" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_TITRE + " TEXT, " + COL_TYPE + " TEXT, " + COL_NBPERS + " TEXT, " + COL_NIVEAU + " TEXT, " + COL_ING + " TEXT, " + COL_INS + " TEXT, "+COL_IMG+" TEXT)";
+        String createTableStatement = "CREATE TABLE " + RECETTE_TABLE + " (" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_TITRE + " TEXT, " + COL_TYPE + " TEXT, " + COL_NBPERS + " TEXT, " + COL_NIVEAU + " TEXT, " + COL_ING + " TEXT, " + COL_INS + " TEXT, " + COL_IMG + " TEXT)";
         db.execSQL(createTableStatement);
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -43,20 +45,24 @@ public class DB_Sqlite extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+
     public boolean AddOne(Recette recette) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
+        long insert=-1;
 
-        cv.put(COL_TITRE, recette.getTitre());
-        cv.put(COL_TYPE, recette.getType());
-        cv.put(COL_NBPERS, recette.getNbpersonnes());
-        cv.put(COL_NIVEAU, recette.getNiveau());
-        cv.put(COL_ING, recette.getIngredients());
-        cv.put(COL_INS, recette.getInstruction());
-        cv.put(COL_IMG, recette.getImage());
-
-        long insert = db.insert(RECETTE_TABLE, null, cv);
-
+        try{
+            cv.put(COL_TITRE, recette.getTitre());
+            cv.put(COL_TYPE, recette.getType());
+            cv.put(COL_NBPERS, recette.getNbpersonnes());
+            cv.put(COL_NIVEAU, recette.getNiveau());
+            cv.put(COL_ING, recette.getIngredients());
+            cv.put(COL_INS, recette.getInstruction());
+            cv.put(COL_IMG, recette.getImage());
+            insert = db.insert(RECETTE_TABLE, null, cv);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         if (insert == -1) return false;
         else return true;
     }
@@ -64,9 +70,7 @@ public class DB_Sqlite extends SQLiteOpenHelper {
 
     public boolean modifyOne(Recette recette) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues cv = new ContentValues();
-
         cv.put(COL_TITRE, recette.getTitre());
         cv.put(COL_TYPE, recette.getType());
         cv.put(COL_NBPERS, recette.getNbpersonnes());
@@ -74,12 +78,9 @@ public class DB_Sqlite extends SQLiteOpenHelper {
         cv.put(COL_ING, recette.getIngredients());
         cv.put(COL_INS, recette.getInstruction());
         cv.put(COL_IMG, recette.getImage());
-
         long where = recette.getId();
-        long result = db.update(RECETTE_TABLE, cv,COL_ID+" = '"+recette.getId() +"'", null);
-
+        long result = db.update(RECETTE_TABLE, cv, COL_ID + " = '" + recette.getId() + "'", null);
         db.close();
-
         if (result == -1) return false;
         else return true;
     }
@@ -87,12 +88,9 @@ public class DB_Sqlite extends SQLiteOpenHelper {
 
     public List<Recette> getAllReceips() {
         List<Recette> returnlist = new ArrayList<Recette>();
-
         String queryString = "SELECT * FROM " + RECETTE_TABLE;
         SQLiteDatabase db = this.getReadableDatabase();
-
         Cursor cursor = db.rawQuery(queryString, null);
-
         if (cursor.moveToFirst()) {
 //            Retirer la liste des recettes
             do {
@@ -104,61 +102,45 @@ public class DB_Sqlite extends SQLiteOpenHelper {
                 String recetteing = cursor.getString(5);
                 String recetteins = cursor.getString(6);
                 String recetteimg = cursor.getString(7);
-
-                Recette marecette = new Recette(recetteid, recettetitre, recettetype, recettenbpers, recetteniveau, recetteing, recetteins,recetteimg);
+                Recette marecette = new Recette(recetteid, recettetitre, recettetype, recettenbpers, recetteniveau, recetteing, recetteins, recetteimg);
                 returnlist.add(marecette);
             } while (cursor.moveToNext());
-
         } else {
 //          rien ne sera a joute a la liste
         }
-
         cursor.close();
         db.close();
         return returnlist;
     }
 
 
-
-
-
     public void deleteOne(int id) {
         SQLiteDatabase mydb = this.getWritableDatabase();
-
-        mydb.delete(RECETTE_TABLE, "COL_ID = ?", new String[] {String.valueOf(id)});
+        mydb.delete(RECETTE_TABLE, "COL_ID = ?", new String[]{String.valueOf(id)});
     }
 
 
-
-
-
-
-    public Recette getRecetteById(int id){
+    public Recette getRecetteById(int id) {
         Recette marecette = null;
         SQLiteDatabase mydb = this.getReadableDatabase();
-        String queryString = "SELECT * FROM " + RECETTE_TABLE + " WHERE " + COL_ID + " = " + id+";";
+        String queryString = "SELECT * FROM " + RECETTE_TABLE + " WHERE " + COL_ID + " = " + id + ";";
         Cursor cursor = mydb.rawQuery(queryString, null);
-
         if (cursor.moveToFirst()) {
 //            Retirer la liste des recettes
-                int recetteid = cursor.getInt(0);
-                String recettetitre = cursor.getString(1);
-                String recettetype = cursor.getString(2);
-                int recettenbpers = cursor.getInt(3);
-                String recetteniveau = cursor.getString(4);
-                String recetteing = cursor.getString(5);
+            int recetteid = cursor.getInt(0);
+            String recettetitre = cursor.getString(1);
+            String recettetype = cursor.getString(2);
+            int recettenbpers = cursor.getInt(3);
+            String recetteniveau = cursor.getString(4);
+            String recetteing = cursor.getString(5);
             String recetteins = cursor.getString(6);
             String recetteimg = cursor.getString(7);
-
-                marecette = new Recette(recetteid, recettetitre, recettetype, recettenbpers, recetteniveau, recetteing, recetteins,recetteimg);
+            marecette = new Recette(recetteid, recettetitre, recettetype, recettenbpers, recetteniveau, recetteing, recetteins, recetteimg);
         } else {
 //          rien ne sera a joute a la liste
         }
         return marecette;
     }
-
-
-
 }
 
 

@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Titre"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/red"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Type"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/red"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -49,14 +49,14 @@
                 android:id="@+id/etype"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/light_red"/>
+                android:background="@color/light_red" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Nombre de personnes"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/red"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Ingredients"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/red"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Niveau"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/red"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -99,14 +99,14 @@
                 android:id="@+id/eniveau"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/light_red"/>
+                android:background="@color/light_red" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Instructions"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/red"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -115,15 +115,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:height="100dp"
-                android:hint="1. Etape 1 \n2. Etape 2 \n..."
-                android:background="@color/light_red" />
+                android:background="@color/light_red"
+                android:hint="1. Etape 1 \n2. Etape 2 \n..." />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Image"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/red"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -131,10 +131,10 @@
                 android:id="@+id/eimage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/cardview_shadow_start_color"
                 android:onClick="choose_image"
                 android:text="Choisir une image"
-                android:background="@color/cardview_shadow_start_color"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
 
 
             <Button
@@ -142,11 +142,11 @@
                 android:layout_width="153dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="40dp"
                 android:onClick="tbn_ajouter"
                 android:text="Ajouter"
-                android:textSize="20dp"
-                android:layout_marginTop="10dp"/>
+                android:textSize="20dp" />
 
 
         </LinearLayout>

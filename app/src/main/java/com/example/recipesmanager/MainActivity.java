@@ -30,32 +30,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 //        Demande d'acces au stockage pour le traitement des images des recettes.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-            requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},1);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
 
         List<Recette> allReceips = mydata.getAllReceips();
-
-
         ListView listv = (ListView) findViewById(R.id.list);
         showList(allReceips, listv);
-
 
         listv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 Recette clickedrecette = (Recette) parent.getItemAtPosition(position);
                 Intent todetails = new Intent(MainActivity.this, Details.class);
-
                 todetails.putExtra("selectedid", clickedrecette.getId());
                 startActivity(todetails);
                 finish();
-
             }
         });
     }
+
 
     private void showList(List items, ListView listv) {
         adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, items);
@@ -68,5 +63,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(myintent);
         finish();
     }
-
 }

@@ -90,15 +90,6 @@ public class Recette {
     @Override
     public String toString() {
         return titre;
-//                "Recette{" +
-//                "id='" + id + '\'' +
-//                ",titre='" + titre + '\'' +
-//                ", type='" + type + '\'' +
-//                ", nbpersonnes=" + nbpersonnes +
-//                ", niveau='" + niveau + '\'' +
-//                ", ingredients='" + ingredients + '\'' +
-//                ", instruction='" + instruction + '\'' +
-//                '}';
     }
 
     public int getId() {

@@ -29,15 +29,13 @@ public class Modify extends AppCompatActivity {
     ImageView img;
     Recette recette;
     int id;
-
-    private static final int PICK_INAGE=100;
-    String imgpath="null";
+    private static final int PICK_INAGE = 100;
+    String imgpath = "null";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify);
-
 
         //Liste des types
         Spinner mySpinner = (Spinner) findViewById(R.id.etype);
@@ -77,7 +75,7 @@ public class Modify extends AppCompatActivity {
 
         img = (ImageView) findViewById(R.id.image);
         String tmpimg = recette.getImage();
-        File imgFile = new  File(tmpimg);
+        File imgFile = new File(tmpimg);
         img.setImageBitmap(BitmapFactory.decodeFile(imgFile.getAbsolutePath()));
         imgpath = recette.getImage(); //Si l'image n'est pas modifie on envoit l'image courante
     }
@@ -92,7 +90,7 @@ public class Modify extends AppCompatActivity {
         }
         return index;
     }
-//--------------------------------------------------------
+
 
     public void tbn_enregistrer(View view) {
 
@@ -106,58 +104,55 @@ public class Modify extends AppCompatActivity {
             String ing = ingredient.getText().toString();
             String ni = niveau.getSelectedItem().toString();
             String ins = instruction.getText().toString();
-
-
-
             modifiedrecette = new Recette(id, ti, ty, nb, ni, ing, ins, imgpath);
-
-
         } catch (Exception e) {
             Toast.makeText(Modify.this, "ERREUR", Toast.LENGTH_SHORT).show();
         }
-
         boolean res = mydb.modifyOne(modifiedrecette);
 
-        if (res == true) Toast.makeText(Modify.this, modifiedrecette.getId()+ " Modifié Avec Succès", Toast.LENGTH_SHORT).show();
-
+        if (res == true)
+            Toast.makeText(Modify.this, modifiedrecette.getTitre() + " Modifié Avec Succès", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(Modify.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
 
-//    Traitement d'image
-public void choose_image(View view) {
 
-    Intent intent = new Intent(Intent.ACTION_PICK, Uri.parse(
-            "content://media/internal/images/media"
-    ));
-    startActivityForResult(intent, PICK_INAGE);
-}
+    //    Traitement d'image
+    public void choose_image(View view) {
+
+        Intent intent = new Intent(Intent.ACTION_PICK, Uri.parse(
+                "content://media/internal/images/media"
+        ));
+        startActivityForResult(intent, PICK_INAGE);
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==RESULT_OK && requestCode==PICK_INAGE){
+        if (resultCode == RESULT_OK && requestCode == PICK_INAGE) {
             Uri uri = data.getData();
             String x = getPath(uri);
             imgpath = x;
-
-            File imgFile = new  File(imgpath);
+            File imgFile = new File(imgpath);
             img.setImageBitmap(BitmapFactory.decodeFile(imgFile.getAbsolutePath()));
         }
     }
 
-    public String getPath(Uri uri){
-        if(uri==null) return null;
-        String [] projection ={MediaStore.Images.Media.DATA};
-        Cursor cursor = managedQuery(uri, projection, null,null,null);
-        if(cursor!=null){
+
+    public String getPath(Uri uri) {
+        if (uri == null) return null;
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        if (cursor != null) {
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
             return cursor.getString(column_index);
         }
         return uri.getPath();
     }
+
 
     @Override
     public void onBackPressed() {
@@ -166,5 +161,4 @@ public void choose_image(View view) {
         startActivity(intent);
         finish();
     }
-
 }

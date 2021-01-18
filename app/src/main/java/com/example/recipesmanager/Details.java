@@ -70,24 +70,17 @@ public class Details extends AppCompatActivity {
         String tmpimg = recette.getImage();
         File imgFile = new  File(tmpimg);
         tvimage.setImageBitmap(BitmapFactory.decodeFile(imgFile.getAbsolutePath()));
-
-
-
-//        Toast.makeText(Details.this,tmpimg,Toast.LENGTH_SHORT).show();
-
-
     }
+
 
     public void btn_delete(View view) {
         TextView tvid = findViewById(R.id.id);
         int id = Integer.parseInt(String.valueOf(tvid.getText()));
-
         DB_Sqlite mydb = new DB_Sqlite(Details.this);
-
         AlertDialog diaBox = AskOption(id, mydb);
         diaBox.show();
-
     }
+
 
     private AlertDialog AskOption(int id, DB_Sqlite db) {
         AlertDialog myQuittingDialogBox = new AlertDialog.Builder(this)
@@ -102,7 +95,6 @@ public class Details extends AppCompatActivity {
                         finish();
                         dialog.dismiss();
                     }
-
                 })
                 .setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -116,15 +108,14 @@ public class Details extends AppCompatActivity {
 
 
     public void btn_modify(View view) {
-
         tvid = findViewById(R.id.id);
         int id = Integer.parseInt(tvid.getText().toString());
-
         Intent intent = new Intent(Details.this, Modify.class);
         intent.putExtra("id", id);
         startActivity(intent);
         finish();
     }
+
 
     @Override
     public void onBackPressed() {

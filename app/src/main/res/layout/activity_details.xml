@@ -22,8 +22,8 @@
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/img"/>
+                android:layout_height="225dp"
+                android:src="@drawable/img" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -35,11 +35,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
+                    android:onClick="btn_modify"
                     android:text="TEXT"
                     android:textSize="30dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
-<!--                Cet TextView est pour recepurer l'id en cas de modification -->
+                <!--                Cet TextView est pour recepurer l'id en cas de modification   -->
                 <TextView
                     android:id="@+id/id"
                     android:layout_width="0dp"
@@ -62,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textSize="17dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/nbpersonnes"
@@ -70,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="17dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/niveau"
@@ -78,16 +79,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
                     android:textSize="17dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
                 android:text="Ingredients :"
                 android:textSize="26dp"
-                android:layout_marginBottom="15dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/ingredients"
@@ -98,17 +99,17 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
                 android:text="Instructions :"
                 android:textSize="26dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/instruction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="25dp"/>
+                android:paddingBottom="25dp" />
 
 
         </LinearLayout>
@@ -118,26 +119,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:orientation="horizontal"
-        android:layout_margin="15dp">
+        android:layout_margin="15dp"
+        android:orientation="horizontal">
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:text="Modifier"
             android:onClick="btn_modify"
-            />
+            android:text="Modifier" />
 
         <Button
             android:id="@+id/delete_btn"
-            android:onClick="btn_delete"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:text="Supprimer"/>
+            android:onClick="btn_delete"
+            android:text="Supprimer" />
     </LinearLayout>
 
 
