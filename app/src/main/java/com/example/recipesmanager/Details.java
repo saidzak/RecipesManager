@@ -33,7 +33,7 @@ public class Details extends AppCompatActivity {
 
 
 
-    @Overrid
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
