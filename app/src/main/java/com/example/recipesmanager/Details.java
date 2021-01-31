@@ -37,7 +37,7 @@ public class Details extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-
+f
         Intent i = getIntent();
         int selectedid = getIntent().getExtras().getInt("selectedid");
 
